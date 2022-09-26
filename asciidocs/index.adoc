@@ -1,5 +1,12 @@
 = 2022-09-fortbildung-security-knopper
+firstname lastname
+1.0.0, 2022-09-25: Mitschrift
 ifndef::imagesdir[:imagesdir: images]
+//:toc-placement!:  // prevents the generation of the doc at this position, so it can be printed afterwards
+:sourcedir: ../src/main/java
+:icons: font
+:sectnums:    // Nummerierung der Überschriften / section numbering
+:toc: left
 
 == Organisatorisches
 
@@ -64,10 +71,36 @@ brw-r-----   1 root    operator   0x100000a Sep 14 19:53 disk2s1
 screen cu.usbserial-1210 115200`
 ----
 
+=== Pin-Belegung
+
+image::rpi-pins-serial-port.jpeg[]
+
+IMPORTANT: Das rote Kabel wurde entfernt, da dieses die Stromversorgung ist und den RPi zerstören würde
 
 
+|===
+|Farbe |Pin Rpi
+
+|schwarz
+|GND
+
+|weiß
+|GPIO 14 (TXD)
+
+|grün
+|GPIO 15 (RD)
+
+|===
 
 
+.Quelle: https://www.raspberrypi.com/documentation/computers/os.html#gpio-and-the-40-pin-header[GPIO and the 40-pin Header^]
+image::gpio-pinout-diagram.png[]
+
+[%collapsible]
+====
+.Quelle: https://www.elektronik-kompendium.de/sites/raspberry-pi/1907101.htm[Elektronik Kompendium - Raspberry Pi: Belegung GPIO^]
+image::raspberry-pi-pins.jpg[]
+====
 
 == Theoretische Grundlagen
 
@@ -75,6 +108,36 @@ screen cu.usbserial-1210 115200`
 
 
 
+=== Download eines Zertifikats
+
+* Greift man auf eine Website zu, deren Zertifikat man nicht hat, dann kann man diese downloaden und im Browser hinterlegen
+
+image::potential-security-risk-1.png[]
+
+image::potential-security-risk-2.png[]
+
+image::potential-security-risk-3.png[]
+
+image::potential-security-risk-4.png[]
+
+
+
+* PEM (chain) downloaden
+
+
+
+=== Importieren eines Zertifikats
+
+image:import-certificates-1.png[]
+
+image:import-certificates-2.png[]
+
+image:import-certificates-3.png[]
+
+image:import-certificates-4.png[]
+
+
+* Leider funktioniert es beim Mozilla nicht, da diese self-signed-certificates nicht akzeptiert.
 
 
 
@@ -82,4 +145,31 @@ screen cu.usbserial-1210 115200`
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+== Interesting Links
+
+* https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/4/24696/files/2014/07/Unix.PSU_.pdf[Russell Poucher - UNIX: Working the
+Command Line in OS X^]
 
