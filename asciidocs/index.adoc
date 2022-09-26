@@ -9,7 +9,7 @@ ifndef::imagesdir[:imagesdir: images]
 
 == Anbindung an RPi über Serial Port
 
-* siehe link:download/Skript.pdf[Skript.pdf], S. 81
+* siehe link:download/Skript.pdf[Skript.pdf^], S. 81
 * https://pbxbook.com/other/mac-tty.html[Mike's PBX Cookbook - Mac's and serial TTY's]
 * zu kaufen bei https://www.amazon.de/PL2303TA-programming-serial-support-raspberry/dp/B09KGQCZ58/ref=sr_1_5?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=13VM6XXSRKS2T&keywords=usb+to+ttl&qid=1664182610&sprefix=usb+to+ttl%2Caps%2C104&sr=8-5[amazon]
 
@@ -71,7 +71,7 @@ screen cu.usbserial-1210 115200`
 
 == Theoretische Grundlagen
 
-* link:download/Folien.pdf[Folien.pdf]
+* link:download/Folien.pdf[Folien.pdf^]
 
 
 
