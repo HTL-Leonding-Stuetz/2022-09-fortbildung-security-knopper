@@ -463,7 +463,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_importieren_eines_zertifikats">3.2. Importieren eines Zertifikats</a></li>
 </ul>
 </li>
-<li><a href="#_interesting_links">4. Interesting Links</a></li>
+<li><a href="#_gpg_key_erzeugen">4. GPG Key erzeugen</a>
+<ul class="sectlevel2">
+<li><a href="#_ansehen_des_private_keys">4.1. Ansehen des private keys</a></li>
+<li><a href="#_import_eines_pgp_keys">4.2. Import eines pgp keys</a></li>
+<li><a href="#_auflisten_aller_keys">4.3. Auflisten aller keys</a></li>
+<li><a href="#_public_key_auf_keyserver_hochladen">4.4. Public Key auf Keyserver hochladen</a></li>
+<li><a href="#_datei_verschlüsseln">4.5. Datei verschlüsseln</a></li>
+</ul>
+</li>
+<li><a href="#_interesting_links">5. Interesting Links</a></li>
 </ul>
 </div>
 </div>
@@ -707,10 +716,249 @@ Das rote Kabel wurde entfernt, da dieses die Stromversorgung ist und den RPi zer
 </div>
 </div>
 <div class="sect1">
-<h2 id="_interesting_links"><a class="anchor" href="#_interesting_links"></a>4. Interesting Links</h2>
+<h2 id="_gpg_key_erzeugen"><a class="anchor" href="#_gpg_key_erzeugen"></a>4. GPG Key erzeugen</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
+<li>
+<p>GPG wird eher zur Punkt-zur-Punkt Verschlüsselung verwendet</p>
+</li>
+<li>
+<p>ansonsten ehe SSL (siehe Skript S.83ff)</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>gpg --full-generate-key</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Grundsätzlich default-Werte auswählen</p>
+</li>
+<li>
+<p>allerdings sollte man ein expire date eingeben</p>
+</li>
+<li>
+<p>Die Schlüssel sind im Verzeichnis <code>.gnupg</code></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>pi@raspberrypi:~ $ gpg --full-generate-key
+gpg (GnuPG) 2.2.27; Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Please select what kind of key you want:
+   (1) RSA and RSA (default)
+   (2) DSA and Elgamal
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+  (14) Existing key from card
+Your selection?
+RSA keys may be between 1024 and 4096 bits long.
+What keysize do you want? (3072)
+Requested keysize is 3072 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      &lt;n&gt;  = key expires in n days
+      &lt;n&gt;w = key expires in n weeks
+      &lt;n&gt;m = key expires in n months
+      &lt;n&gt;y = key expires in n years
+Key is valid for? (0)
+Key does not expire at all
+Is this correct? (y/N) y
+
+GnuPG needs to construct a user ID to identify your key.
+
+Real name: Thomas Stuetz
+Email address: thomas.stuetz@nomail.com
+Comment:
+You selected this USER-ID:
+    "Thomas Stuetz &lt;thomas.stuetz@nomail.com&gt;"
+
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? o
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+gpg: /home/pi/.gnupg/trustdb.gpg: trustdb created
+gpg: key E473811AF29114BC marked as ultimately trusted
+gpg: directory '/home/pi/.gnupg/openpgp-revocs.d' created
+gpg: revocation certificate stored as '/home/pi/.gnupg/openpgp-revocs.d/75FF34D512D4F5262531BB32E473811AF29114BC.rev'
+public and secret key created and signed.
+
+pub   rsa3072 2022-09-26 [SC]
+      75FF34D512D4F5262531BB32E473811AF29114BC
+uid                      Thomas Stuetz &lt;thomas.stuetz@nomail.com&gt;
+sub   rsa3072 2022-09-26 [E]</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ansehen_des_private_keys"><a class="anchor" href="#_ansehen_des_private_keys"></a>4.1. Ansehen des private keys</h3>
+<div class="listingblock">
+<div class="content">
+<pre>gpg --export-secret-keys -a</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">output</div>
+<div class="content">
+<pre>-----BEGIN PGP PRIVATE KEY BLOCK-----
+
+lQWGBGMxn8wBDADhUJzfDBWaXl/UXC16NpC3PTIBxdqfdjNoV+lv0oH699Vk2jse
+d00byp8dyW4hEdDGkcIQD9l8BWwl90J/PC2MKYSYWIvNbRoMpXhJJT5KjopcQFAk
+...
+f29zLrpRTfsgH3bfdpyhbtquqZVjRlKAXVRtdmeteuVQ75i3A9GYviIY5dmSPpn0
+8SSeltYaead94dCVZwN8V590xZ/aUgVg42JkaCsoSmxqMnO5ClvXPcYwSnabsx+z
+M0hf55MI4jFjbDgl4c2y3qmcqy9oGBWS1+ORRWJerz9exyEgiyY=
+=XiIE
+-----END PGP PRIVATE KEY BLOCK-----</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>-a für Ausgabe als ASCII-Text</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_import_eines_pgp_keys"><a class="anchor" href="#_import_eines_pgp_keys"></a>4.2. Import eines pgp keys</h3>
+<div class="listingblock">
+<div class="content">
+<pre>gpg --import &lt; datei.txt</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>oder</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>gpg --import</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>mit Copy-Paste Key einfügen</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_auflisten_aller_keys"><a class="anchor" href="#_auflisten_aller_keys"></a>4.3. Auflisten aller keys</h3>
+<div class="listingblock">
+<div class="content">
+<pre>gpg --list-keys</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">output</div>
+<div class="content">
+<pre>gpg: checking the trustdb
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+/home/pi/.gnupg/pubring.kbx
+---------------------------
+pub   rsa3072 2022-09-26 [SC]
+      75FF34D512D4F5262531BB32E473811AF29114BC
+uid           [ultimate] Thomas Stuetz &lt;thomas.stuetz@nomail.com&gt;
+sub   rsa3072 2022-09-26 [E]</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_key_auf_keyserver_hochladen"><a class="anchor" href="#_public_key_auf_keyserver_hochladen"></a>4.4. Public Key auf Keyserver hochladen</h3>
+<div class="listingblock">
+<div class="title">siehe Skript</div>
+<div class="content">
+<pre>gpg --keyserver ...</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_datei_verschlüsseln"><a class="anchor" href="#_datei_verschlüsseln"></a>4.5. Datei verschlüsseln</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Skript S.84</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>gpg --encrypt -a -r thomas.stuetz@nomail.com hallo.txt</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>man braucht die Passphrase nicht, da mit dem Public Key verschlüsselt wird</p>
+</li>
+<li>
+<p>eine Datei <code>hallo.txt.asc</code> wird erstellt</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">cat hallo.txt.asc</div>
+<div class="content">
+<pre>-----BEGIN PGP MESSAGE-----
+
+hQGMA0OH9tFlXeihAQv/QmSXb6nqilkKr8sJADpaxVNBbji0CdXG6Jz62oGlEb36
+TA1CKEF+sd9hak0mvitBv4vkFosFtV8M8cqoOPz/etiLpxf/totjRzifLpxuOpdy
+FDKSXULTWZ171eqG63jZTmvNb392Lr87HyFKAUXhL7TSvz/c8226ahkEEg9Hykkc
+knGQ5fJ08zpKLf0zFgQB6tIXAKJhvB5dIxPkoAvUbFsNUeaxVpW9sH+NhDexfPLg
+szulTtmqCX5RxQAoOKV51qeubccfhluWKxzRyChNf5PQlWptlJOSr+9pso/mCtxK
+/QkRsGLa1Cy6CK7dSxomV92OgCoMaPk2LQ8GKp0Q8PkgEzlTHQp7txyrOKWltuQz
+gSWo7VMyY1UIRic9G0p6jcXua15jKT4Wgk6GKnQVjTMsIP91kXDHq6EqT/kS3hZ6
+XTjZIlhP0OJOV6OAJWE/bRt/2ewvr6qZiZ7Ef9m6YUoeVEaY1HgaYhQBJUmAGwja
+gddbIF+uzDFS7ixzYAfb0sAzAQpuSklFevNjsmt20N53dEknJEZfGGD7C3m3Vbe3
+nab55HF3ag5j/YCkAJtxwOCGpwuL/4mFTke6VtFkflVTJ0IExGAMXP2v9i2unmnz
+pP3kWZxl9iONk5vnU5N4aDwcV1sVIOCJ7jZqUD3woehEkPgoiBpFZn7ncBg5RXsV
+yui4yMdEm3rwtsTJzqtUpdsBu+jKAcTJudRCgNWNOsb6WhsEs0Wf7GHhK7XSMFTF
+RCcbbjgOwmu2LvAWpgb+Qeb6uczSkzn421P4zZw2F0u3XTL6D44rdCaDzJygP/K6
++14TvIuJ3QYNDW/MsuFIVA80jdpS
+=R11z
+-----END PGP MESSAGE-----</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>gpg --decrypt -o hallo-neu.txt hallo.txt.asc</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Passphrase eingeben</p>
+</li>
+<li>
+<p>mit <code>cat hallo-neu.txt</code> ansehen</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_interesting_links"><a class="anchor" href="#_interesting_links"></a>5. Interesting Links</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://knopper.net/" target="_blank" rel="noopener">Klaus Knopper - knopper.net</a></p>
+</li>
 <li>
 <p><a href="https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/4/24696/files/2014/07/Unix.PSU_.pdf" target="_blank" rel="noopener">Russell Poucher - UNIX: Working the
 Command Line in OS X</a></p>
@@ -723,7 +971,7 @@ Command Line in OS X</a></p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2022-09-26 12:30:12 UTC
+Last updated 2022-09-26 13:22:34 UTC
 </div>
 </div>
 </body>
