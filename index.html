@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.17">
 <link rel="icon" type="image/png" href="themes/favicon.png">
 <title>2022-09-fortbildung-security-knopper</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -194,7 +194,8 @@ body.toc2.toc-right{padding-left:0;padding-right:20em}}
 #content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
 details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
 details{margin-left:1.25rem}
-details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;-webkit-tap-highlight-color:transparent}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
 details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
 details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
 details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
@@ -236,9 +237,8 @@ pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
 table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
 table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
 table.linenotable td.code{padding-left:.75em}
-table.linenotable td.linenos{border-right:1px solid;opacity:.35;padding-right:.5em}
-pre.pygments .lineno{border-right:1px solid;opacity:.35;display:inline-block;margin-right:.75em}
-pre.pygments .lineno::before{content:"";margin-right:-.125em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
 .quoteblock{margin:0 1em 1.25em 1.5em;display:table}
 .quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
 .quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
@@ -275,7 +275,7 @@ table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-c
 table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
 table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
 table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
-table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd),table.stripes-even tr:nth-of-type(even),table.stripes-hover tr:hover{background:#f8f8f7}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
 th.halign-left,td.halign-left{text-align:left}
 th.halign-right,td.halign-right{text-align:right}
 th.halign-center,td.halign-center{text-align:center}
@@ -291,10 +291,11 @@ ol{margin-left:1.75em}
 ul li ol{margin-left:1.5em}
 dl dd{margin-left:1.125em}
 dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
-ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
 ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
 ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
 ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
 ul.checklist>li>p:first-child{margin-left:-1em}
 ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
 ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
@@ -337,8 +338,6 @@ sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
 #footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
 #footnotes .footnote:last-of-type{margin-bottom:0}
 #content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
-.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
-.gist .file-data>table td.line-data{width:99%}
 div.unbreakable{page-break-inside:avoid}
 .big{font-size:larger}
 .small{font-size:smaller}
@@ -446,6 +445,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_organisatorisches">1. Organisatorisches</a></li>
+<li><a href="#_anbindung_an_rpi_über_serial_port">2. Anbindung an RPi über Serial Port</a></li>
+<li><a href="#_theoretische_grundlagen">3. Theoretische Grundlagen</a></li>
 </ul>
 </div>
 </div>
@@ -456,6 +457,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
+<p>Vortragender: Klaus Knopper</p>
+</li>
+<li>
 <p>Datum: 26.9.-28.9.2022</p>
 </li>
 <li>
@@ -465,10 +469,102 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_anbindung_an_rpi_über_serial_port"><a class="anchor" href="#_anbindung_an_rpi_über_serial_port"></a>2. Anbindung an RPi über Serial Port</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>siehe <a href="download/Script.pdf">Script.pdf</a>, S. 81</p>
+</li>
+<li>
+<p><a href="https://pbxbook.com/other/mac-tty.html">Mike&#8217;s PBX Cookbook - Mac&#8217;s and serial TTY&#8217;s</a></p>
+</li>
+<li>
+<p>zu kaufen bei <a href="https://www.amazon.de/PL2303TA-programming-serial-support-raspberry/dp/B09KGQCZ58/ref=sr_1_5?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&amp;crid=13VM6XXSRKS2T&amp;keywords=usb+to+ttl&amp;qid=1664182610&amp;sprefix=usb+to+ttl%2Caps%2C104&amp;sr=8-5">amazon</a></p>
+</li>
+<li>
+<p>Installation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Man braucht keine Treiber</p>
+</li>
+<li>
+<p>Man muss keine Software installieren</p>
+</li>
+<li>
+<p>es reicht das Programm <code>screen</code></p>
+</li>
+<li>
+<p>Man sucht im <code>/dev</code>-Verzeichnis nach einem <code>cu.</code>-Port</p>
+<div class="listingblock">
+<div class="content">
+<pre>❯ l
+total 13
+dr-xr-xr-x   4 root    wheel           5.9K Sep 14 19:53 .
+drwxr-xr-x  20 root    wheel           640B Aug 24 10:59 ..
+crw-rw-rw-   1 root    wheel     0x1d000000 Sep 14 19:53 aes_0
+crw-------   1 root    wheel     0x16000001 Sep 20 21:41 afsc_type5
+brw-------   1 root    operator   0x2000000 Sep 26 09:31 apfs-raw-device.2.0
+crw-------   1 root    wheel      0xb000000 Sep 14 19:53 auditpipe
+crw-r--r--   1 root    wheel      0xa000003 Sep 14 19:53 auditsessions
+crw-------   1 root    wheel     0x1f000000 Sep 14 19:53 autofs
+crw-------   1 root    wheel     0x23000000 Sep 14 19:53 autofs_control
+crw-rw-rw-   1 root    wheel     0x2200010c Sep 14 19:53 autofs_homedirmounter
+crw-rw-rw-   1 root    wheel     0x2100010c Sep 14 19:53 autofs_notrigger
+crw-rw-rw-   1 root    wheel     0x2000b278 Sep 14 19:53 autofs_nowait
+crw-------   1 root    wheel     0x17000000 Sep 14 19:53 bpf0
+crw-------   1 root    wheel     0x17000001 Sep 26 09:30 bpf1
+crw-------   1 root    wheel     0x17000002 Sep 26 09:23 bpf2
+crw-------   1 root    wheel     0x17000003 Sep 14 19:53 bpf3
+crw-------   1 stuetz  staff              0 Sep 16 14:18 console
+crw-rw-rw-   1 root    wheel      0x9000003 Sep 14 19:53 cu.Bluetooth-Incoming-Port
+crw-rw-rw-   1 root    wheel      0x9000001 Sep 14 19:53 cu.BoseRevolveIISoundLink
+crw-rw-rw-   1 root    wheel      0x9000005 Sep 26 10:41 cu.usbserial-1210
+brw-r-----   1 root    operator   0x1000000 Sep 14 19:53 disk0
+brw-r-----   1 root    operator   0x1000001 Sep 14 19:53 disk0s1
+brw-r-----   1 root    operator   0x1000002 Sep 14 19:53 disk0s2
+brw-r-----   1 root    operator   0x1000003 Sep 14 19:53 disk0s3
+brw-r-----   1 root    operator   0x1000004 Sep 14 19:53 disk1
+brw-r-----   1 root    operator   0x1000005 Sep 14 19:53 disk1s1
+brw-r-----   1 root    operator   0x1000006 Sep 14 19:53 disk1s2
+brw-r-----   1 root    operator   0x1000007 Sep 14 19:53 disk1s3
+brw-r-----   1 root    operator   0x1000008 Sep 14 19:53 disk1s4
+brw-r-----   1 root    operator   0x1000009 Sep 14 19:53 disk2
+brw-r-----   1 root    operator   0x100000a Sep 14 19:53 disk2s1
+...</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Hier sieht man den Port <code>cu.usbserial-1210</code></p>
+</li>
+<li>
+<p>Daher verwendet man</p>
+<div class="listingblock">
+<div class="content">
+<pre>screen cu.usbserial-1210 115200`</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_theoretische_grundlagen"><a class="anchor" href="#_theoretische_grundlagen"></a>3. Theoretische Grundlagen</h2>
+<div class="sectionbody">
+
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-26 07:52:55 UTC
+Last updated 2022-09-26 09:06:46 UTC
 </div>
 </div>
 </body>
