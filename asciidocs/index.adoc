@@ -502,10 +502,23 @@ oder zB
 openssl s_client -connect ebay.de:443
 ----
 
+=== Mini-Webserver mit openssl
 
+----
+sudo openssl s_server -key www.key -cert www.cert -accept 443 -WWW
+----
 
+-WWW ... damit man die Files aus dem aktuellen Verzeichnis downloaden kann
 
+.wenn man Port über 1000 verwendet, braucht man kein `sudo`
+----
+openssl s_server -key www.key -cert www.cert -accept 4430 -WWW
+----
 
+.Aufruf mit
+----
+https://10.0.0.223/hallo.txt
+----
 
 
 
