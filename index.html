@@ -457,7 +457,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_pin_belegung">2.1. Pin-Belegung</a></li>
 </ul>
 </li>
-<li><a href="#_theoretische_grundlagen">3. Theoretische Grundlagen</a>
+<li><a href="#_pgp">3. PGP</a>
 <ul class="sectlevel2">
 <li><a href="#_download_eines_zertifikats">3.1. Download eines Zertifikats</a></li>
 <li><a href="#_importieren_eines_zertifikats">3.2. Importieren eines Zertifikats</a></li>
@@ -470,9 +470,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_auflisten_aller_keys">4.3. Auflisten aller keys</a></li>
 <li><a href="#_public_key_auf_keyserver_hochladen">4.4. Public Key auf Keyserver hochladen</a></li>
 <li><a href="#_datei_verschlüsseln">4.5. Datei verschlüsseln</a></li>
+<li><a href="#_trust_level">4.6. Trust Level</a></li>
 </ul>
 </li>
-<li><a href="#_interesting_links">5. Interesting Links</a></li>
+<li><a href="#_openssl">5. OpenSSL</a>
+<ul class="sectlevel2">
+<li><a href="#_mini_webserver_mit_openssl">5.1. Mini-Webserver mit openssl</a></li>
+</ul>
+</li>
+<li><a href="#_interesting_links">6. Interesting Links</a></li>
 </ul>
 </div>
 </div>
@@ -645,7 +651,7 @@ Das rote Kabel wurde entfernt, da dieses die Stromversorgung ist und den RPi zer
 </div>
 </div>
 <div class="sect1">
-<h2 id="_theoretische_grundlagen"><a class="anchor" href="#_theoretische_grundlagen"></a>3. Theoretische Grundlagen</h2>
+<h2 id="_pgp"><a class="anchor" href="#_pgp"></a>3. PGP</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -949,10 +955,255 @@ RCcbbjgOwmu2LvAWpgb+Qeb6uczSkzn421P4zZw2F0u3XTL6D44rdCaDzJygP/K6
 </ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_trust_level"><a class="anchor" href="#_trust_level"></a>4.6. Trust Level</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>es gibt mehrere Trust-Level</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ultimate bedeutet, dass ich ihm voll vertraue und dass</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_interesting_links"><a class="anchor" href="#_interesting_links"></a>5. Interesting Links</h2>
+<h2 id="_openssl"><a class="anchor" href="#_openssl"></a>5. OpenSSL</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Skript S. 85ff</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>openssl req -new -x509 -days 365 -nodes -out ssl.cert -keyout ssl.key</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">output mit Eingabe der Parameter</div>
+<div class="content">
+<pre>...............+++++
+.............+++++
+writing new private key to 'ssl.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:AT
+State or Province Name (full name) [Some-State]:Oberösterreich
+Locality Name (eg, city) []:Windischgarsten
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:High Security Class
+Organizational Unit Name (eg, section) []:IT Kurs
+Common Name (e.g. server FQDN or YOUR name) []:Thomas Stütz
+Email Address []:thomas.stuetz@nomail.com</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ls -l ssl*</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">output</div>
+<div class="content">
+<pre>-rw-r--r-- 1 pi pi 1554 Sep 26 16:47 ssl.cert
+-rw------- 1 pi pi 1704 Sep 26 16:45 ssl.key</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Skript S. 86</div>
+<div class="content">
+<pre>openssl x509 -text -in ssl.cert</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">output</div>
+<div class="content">
+<pre>Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            13:59:5a:22:0d:a3:79:7a:ee:3c:01:95:8f:2f:40:09:0a:22:aa:2e
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C = AT, ST = Ober\C3\83\C2\B6sterreich, L = Windischgarsten, O = High Security Class, OU = IT Kurs, CN = Thomas St\C3\83\C2\BCtz, emailAddress = thomas.stuetz@nomail.com
+        Validity
+            Not Before: Sep 26 14:47:08 2022 GMT
+            Not After : Sep 26 14:47:08 2023 GMT
+        Subject: C = AT, ST = Ober\C3\83\C2\B6sterreich, L = Windischgarsten, O = High Security Class, OU = IT Kurs, CN = Thomas St\C3\83\C2\BCtz, emailAddress = thomas.stuetz@nomail.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (2048 bit)
+                Modulus:
+                    00:d9:a9:58:12:63:ef:3e:6b:ea:ec:c3:3a:50:a4:
+                    b0:ee:ba:9f:35:95:ed:6a:46:73:44:55:95:39:52:
+                    8f:67:17:75:5f:95:c9:46:d0:a7:43:16:ff:22:b0:
+                    88:f3:f7:52:3a:52:0c:d4:49:4d:53:a4:df:00:ca:
+                    2c:d0:23:56:97:be:32:9a:89:05:1c:85:cb:34:f8:
+                    18:f7:e3:b9:97:1c:5c:81:bc:d5:b6:53:b5:b2:14:
+                    e9:b8:2f:75:f2:19:5f:91:a4:06:8f:af:d4:3c:0e:
+                    3f:10:37:6c:28:21:77:5d:8c:d7:a8:05:53:6b:b0:
+                    2e:fe:d0:fe:01:09:29:57:82:14:7c:a7:de:d5:6e:
+                    82:f3:11:82:0d:1b:5a:90:80:b9:72:f7:69:72:2c:
+                    da:5f:c9:3b:e9:78:e6:e6:78:ea:a6:df:3c:f7:d2:
+                    1e:35:7d:73:d0:20:f9:5a:7f:c2:22:b9:8a:5f:f3:
+                    ee:d3:08:ce:b8:c1:36:3b:fe:ba:a8:ea:dd:1d:2e:
+                    35:e6:ac:78:81:b0:ae:4c:76:da:04:50:84:1b:3c:
+                    5f:4f:46:ea:94:3a:db:8f:23:5c:7b:4c:53:72:d1:
+                    6b:dd:6c:e8:cb:eb:cb:a0:f6:d2:49:95:e2:1a:33:
+                    3d:98:70:cd:7c:a0:43:6f:d2:6e:9c:0d:c8:f6:88:
+                    20:7f
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier:
+                6D:07:E2:E5:86:10:CF:A4:5A:E5:E2:71:13:52:E5:AB:A4:FF:40:38
+            X509v3 Authority Key Identifier:
+                keyid:6D:07:E2:E5:86:10:CF:A4:5A:E5:E2:71:13:52:E5:AB:A4:FF:40:38
+
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+    Signature Algorithm: sha256WithRSAEncryption
+         ab:f4:ca:1e:7c:7a:1d:f9:7c:96:12:82:1c:cc:46:6c:80:fb:
+         ef:61:81:b0:34:b1:fc:91:30:67:f5:e3:60:62:2e:67:33:3f:
+         51:82:03:31:43:9c:fc:15:72:ad:15:1f:37:86:ce:64:e0:14:
+         e2:ab:9a:6e:4a:21:5c:d0:f0:50:a3:6c:62:22:21:b0:ea:6f:
+         7d:3c:2b:58:03:28:e0:05:b1:7b:83:1f:f6:70:29:12:a8:84:
+         49:14:5f:32:63:2d:12:0a:7f:0a:02:72:1c:59:49:dc:cc:98:
+         c7:84:9d:8a:76:c4:d6:e2:45:ca:6e:56:a0:9f:a7:d5:43:3d:
+         49:fc:d9:46:3c:64:94:b2:19:ed:96:4e:d3:c4:1f:fd:05:9d:
+         43:9f:d4:9f:10:ad:53:69:f6:d1:44:78:7a:60:0a:90:a6:d7:
+         f4:af:85:3a:4c:86:fc:4d:e2:47:bf:e6:85:7e:61:fb:1b:48:
+         da:52:97:69:0b:cc:9e:3a:58:75:78:24:d9:b4:e2:d4:77:92:
+         fc:99:b7:60:b5:a0:27:fc:11:c8:0d:20:94:16:c9:7a:fb:0e:
+         4e:8c:58:95:84:dc:b6:6d:65:34:b7:7f:a5:2f:63:fe:b4:df:
+         17:d0:c4:f6:55:c0:0e:b8:45:97:24:66:05:31:83:77:73:0a:
+         9f:08:fa:9f
+-----BEGIN CERTIFICATE-----
+MIIETzCCAzegAwIBAgIUE1laIg2jeXruPAGVjy9ACQoiqi4wDQYJKoZIhvcNAQEL
+BQAwgbYxCzAJBgNVBAYTAkFUMRowGAYDVQQIDBFPYmVyw4PCtnN0ZXJyZWljaDEY
+MBYGA1UEBwwPV2luZGlzY2hnYXJzdGVuMRwwGgYDVQQKDBNIaWdoIFNlY3VyaXR5
+IENsYXNzMRAwDgYDVQQLDAdJVCBLdXJzMRgwFgYDVQQDDA9UaG9tYXMgU3TDg8K8
+dHoxJzAlBgkqhkiG9w0BCQEWGHRob21hcy5zdHVldHpAbm9tYWlsLmNvbTAeFw0y
+MjA5MjYxNDQ3MDhaFw0yMzA5MjYxNDQ3MDhaMIG2MQswCQYDVQQGEwJBVDEaMBgG
+A1UECAwRT2JlcsODwrZzdGVycmVpY2gxGDAWBgNVBAcMD1dpbmRpc2NoZ2Fyc3Rl
+bjEcMBoGA1UECgwTSGlnaCBTZWN1cml0eSBDbGFzczEQMA4GA1UECwwHSVQgS3Vy
+czEYMBYGA1UEAwwPVGhvbWFzIFN0w4PCvHR6MScwJQYJKoZIhvcNAQkBFhh0aG9t
+YXMuc3R1ZXR6QG5vbWFpbC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+AoIBAQDZqVgSY+8+a+rswzpQpLDuup81le1qRnNEVZU5Uo9nF3VflclG0KdDFv8i
+sIjz91I6UgzUSU1TpN8AyizQI1aXvjKaiQUchcs0+Bj347mXHFyBvNW2U7WyFOm4
+L3XyGV+RpAaPr9Q8Dj8QN2woIXddjNeoBVNrsC7+0P4BCSlXghR8p97VboLzEYIN
+G1qQgLly92lyLNpfyTvpeObmeOqm3zz30h41fXPQIPlaf8IiuYpf8+7TCM64wTY7
+/rqo6t0dLjXmrHiBsK5MdtoEUIQbPF9PRuqUOtuPI1x7TFNy0WvdbOjL68ug9tJJ
+leIaMz2YcM18oENv0m6cDcj2iCB/AgMBAAGjUzBRMB0GA1UdDgQWBBRtB+LlhhDP
+pFrl4nETUuWrpP9AODAfBgNVHSMEGDAWgBRtB+LlhhDPpFrl4nETUuWrpP9AODAP
+BgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCr9MoefHod+XyWEoIc
+zEZsgPvvYYGwNLH8kTBn9eNgYi5nMz9RggMxQ5z8FXKtFR83hs5k4BTiq5puSiFc
+0PBQo2xiIiGw6m99PCtYAyjgBbF7gx/2cCkSqIRJFF8yYy0SCn8KAnIcWUnczJjH
+hJ2KdsTW4kXKblagn6fVQz1J/NlGPGSUshntlk7TxB/9BZ1Dn9SfEK1TafbRRHh6
+YAqQptf0r4U6TIb8TeJHv+aFfmH7G0jaUpdpC8yeOlh1eCTZtOLUd5L8mbdgtaAn
+/BHIDSCUFsl6+w5OjFiVhNy2bWU0t3+lL2P+tN8X0MT2VcAOuEWXJGYFMYN3cwqf
+CPqf
+-----END CERTIFICATE-----</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>openssl help</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>openssl pkcs12 -export -out datei.p12 -inkey ssl.key -in ssl.cert -name "Thomas Stuetz"</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">output</div>
+<div class="content">
+<pre>Enter Export Password:
+Verifying - Enter Export Password:</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ein .p12 - File wird erstellt</p>
+</li>
+<li>
+<p>Damit kann</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ls -l</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">output</div>
+<div class="content">
+<pre>total 24
+-rw------- 1 pi pi 2792 Sep 26 16:58 datei.p12
+-rw-r--r-- 1 pi pi  226 Sep 26 15:16 hallo.txt
+-rw-r--r-- 1 pi pi 1554 Sep 26 16:47 ssl.cert
+-rw------- 1 pi pi 1704 Sep 26 16:45 ssl.key
+-rwxr-xr-x 1 pi pi  226 Sep 26 05:53 startopenvas.sh
+-rw-r--r-- 1 pi pi  935 Sep 26 15:14 startopenvas.sh.asc</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Infos über beliebige Server</div>
+<div class="content">
+<pre>openssl s_client -connect 10.0.0.13:443</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>oder zB</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>openssl s_client -connect ebay.de:443</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mini_webserver_mit_openssl"><a class="anchor" href="#_mini_webserver_mit_openssl"></a>5.1. Mini-Webserver mit openssl</h3>
+<div class="listingblock">
+<div class="content">
+<pre>sudo openssl s_server -key www.key -cert www.cert -accept 443 -WWW</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>-WWW &#8230;&#8203; damit man die Files aus dem aktuellen Verzeichnis downloaden kann</p>
+</div>
+<div class="listingblock">
+<div class="title">wenn man Port über 1000 verwendet, braucht man kein <code>sudo</code></div>
+<div class="content">
+<pre>openssl s_server -key www.key -cert www.cert -accept 4430 -WWW</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Aufruf mit</div>
+<div class="content">
+<pre>https://10.0.0.223/hallo.txt</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_interesting_links"><a class="anchor" href="#_interesting_links"></a>6. Interesting Links</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -971,7 +1222,7 @@ Command Line in OS X</a></p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2022-09-26 13:22:34 UTC
+Last updated 2022-09-26 16:11:16 UTC
 </div>
 </div>
 </body>
