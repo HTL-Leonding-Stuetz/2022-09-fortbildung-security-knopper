@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="author" content="firstname lastname">
 <link rel="icon" type="image/png" href="themes/favicon.png">
 <title>2022-09-fortbildung-security-knopper</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -441,12 +442,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <body class="article toc2 toc-left">
 <div id="header">
 <h1>2022-09-fortbildung-security-knopper</h1>
+<div class="details">
+<span id="author" class="author">firstname lastname</span><br>
+<span id="revnumber">version 1.0.0,</span>
+<span id="revdate">2022-09-25</span>
+<br><span id="revremark">Mitschrift</span>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_organisatorisches">1. Organisatorisches</a></li>
-<li><a href="#_anbindung_an_rpi_über_serial_port">2. Anbindung an RPi über Serial Port</a></li>
-<li><a href="#_theoretische_grundlagen">3. Theoretische Grundlagen</a></li>
+<li><a href="#_anbindung_an_rpi_über_serial_port">2. Anbindung an RPi über Serial Port</a>
+<ul class="sectlevel2">
+<li><a href="#_pin_belegung">2.1. Pin-Belegung</a></li>
+</ul>
+</li>
+<li><a href="#_theoretische_grundlagen">3. Theoretische Grundlagen</a>
+<ul class="sectlevel2">
+<li><a href="#_download_eines_zertifikats">3.1. Download eines Zertifikats</a></li>
+<li><a href="#_importieren_eines_zertifikats">3.2. Importieren eines Zertifikats</a></li>
+</ul>
+</li>
+<li><a href="#_interesting_links">4. Interesting Links</a></li>
 </ul>
 </div>
 </div>
@@ -478,10 +495,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>siehe <a href="download/Skript.pdf" target="_blank" rel="noopener">Skript.pdf</a>, S. 81</p>
 </li>
 <li>
-<p><a href="https://pbxbook.com/other/mac-tty.html">Mike&#8217;s PBX Cookbook - Mac&#8217;s and serial TTY&#8217;s</a></p>
+<p><a href="https://pbxbook.com/other/mac-tty.html" target="_blank" rel="noopener">Mike&#8217;s PBX Cookbook - Mac&#8217;s and serial TTY&#8217;s</a></p>
 </li>
 <li>
-<p>zu kaufen bei <a href="https://www.amazon.de/PL2303TA-programming-serial-support-raspberry/dp/B09KGQCZ58/ref=sr_1_5?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&amp;crid=13VM6XXSRKS2T&amp;keywords=usb+to+ttl&amp;qid=1664182610&amp;sprefix=usb+to+ttl%2Caps%2C104&amp;sr=8-5">amazon</a></p>
+<p>zu kaufen bei <a href="https://www.amazon.de/PL2303TA-programming-serial-support-raspberry/dp/B09KGQCZ58/ref=sr_1_5?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&amp;crid=13VM6XXSRKS2T&amp;keywords=usb+to+ttl&amp;qid=1664182610&amp;sprefix=usb+to+ttl%2Caps%2C104&amp;sr=8-5" target="_blank" rel="noopener">amazon</a></p>
 </li>
 <li>
 <p>Installation:</p>
@@ -553,6 +570,69 @@ brw-r-----   1 root    operator   0x100000a Sep 14 19:53 disk2s1
 </li>
 </ul>
 </div>
+<div class="sect2">
+<h3 id="_pin_belegung"><a class="anchor" href="#_pin_belegung"></a>2.1. Pin-Belegung</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/rpi-pins-serial-port.jpeg" alt="rpi pins serial port">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Das rote Kabel wurde entfernt, da dieses die Stromversorgung ist und den RPi zerstören würde
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Farbe</th>
+<th class="tableblock halign-left valign-top">Pin Rpi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">schwarz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GND</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">weiß</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GPIO 14 (TXD)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">grün</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GPIO 15 (RD)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock">
+<div class="content">
+<img src="images/gpio-pinout-diagram.png" alt="gpio pinout diagram">
+</div>
+<div class="title">Figure 1. Quelle: <a href="https://www.raspberrypi.com/documentation/computers/os.html#gpio-and-the-40-pin-header" target="_blank" rel="noopener">GPIO and the 40-pin Header</a></div>
+</div>
+<details>
+<summary class="title">Details</summary>
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="images/raspberry-pi-pins.jpg" alt="raspberry pi pins">
+</div>
+<div class="title">Figure 2. Quelle: <a href="https://www.elektronik-kompendium.de/sites/raspberry-pi/1907101.htm" target="_blank" rel="noopener">Elektronik Kompendium - Raspberry Pi: Belegung GPIO</a></div>
+</div>
+</div>
+</details>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -565,12 +645,85 @@ brw-r-----   1 root    operator   0x100000a Sep 14 19:53 disk2s1
 </li>
 </ul>
 </div>
+<div class="sect2">
+<h3 id="_download_eines_zertifikats"><a class="anchor" href="#_download_eines_zertifikats"></a>3.1. Download eines Zertifikats</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Greift man auf eine Website zu, deren Zertifikat man nicht hat, dann kann man diese downloaden und im Browser hinterlegen</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/potential-security-risk-1.png" alt="potential security risk 1">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/potential-security-risk-2.png" alt="potential security risk 2">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/potential-security-risk-3.png" alt="potential security risk 3">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/potential-security-risk-4.png" alt="potential security risk 4">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>PEM (chain) downloaden</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_importieren_eines_zertifikats"><a class="anchor" href="#_importieren_eines_zertifikats"></a>3.2. Importieren eines Zertifikats</h3>
+<div class="paragraph">
+<p><span class="image"><img src="images/import-certificates-1.png" alt="import certificates 1"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/import-certificates-2.png" alt="import certificates 2"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/import-certificates-3.png" alt="import certificates 3"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/import-certificates-4.png" alt="import certificates 4"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Leider funktioniert es beim Mozilla nicht, da diese self-signed-certificates nicht akzeptiert.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_interesting_links"><a class="anchor" href="#_interesting_links"></a>4. Interesting Links</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/4/24696/files/2014/07/Unix.PSU_.pdf" target="_blank" rel="noopener">Russell Poucher - UNIX: Working the
+Command Line in OS X</a></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-26 09:29:29 UTC
+Version 1.0.0<br>
+Last updated 2022-09-26 12:30:12 UTC
 </div>
 </div>
 </body>
