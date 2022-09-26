@@ -142,6 +142,186 @@ image:import-certificates-4.png[]
 
 
 
+== GPG Key erzeugen
+
+* GPG wird eher zur Punkt-zur-Punkt Verschlüsselung verwendet
+* ansonsten ehe SSL (siehe Skript S.83ff)
+
+----
+gpg --full-generate-key
+----
+
+* Grundsätzlich default-Werte auswählen
+* allerdings sollte man ein expire date eingeben
+* Die Schlüssel sind im Verzeichnis `.gnupg`
+
+----
+pi@raspberrypi:~ $ gpg --full-generate-key
+gpg (GnuPG) 2.2.27; Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Please select what kind of key you want:
+   (1) RSA and RSA (default)
+   (2) DSA and Elgamal
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+  (14) Existing key from card
+Your selection?
+RSA keys may be between 1024 and 4096 bits long.
+What keysize do you want? (3072)
+Requested keysize is 3072 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+Key is valid for? (0)
+Key does not expire at all
+Is this correct? (y/N) y
+
+GnuPG needs to construct a user ID to identify your key.
+
+Real name: Thomas Stuetz
+Email address: thomas.stuetz@nomail.com
+Comment:
+You selected this USER-ID:
+    "Thomas Stuetz <thomas.stuetz@nomail.com>"
+
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? o
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+gpg: /home/pi/.gnupg/trustdb.gpg: trustdb created
+gpg: key E473811AF29114BC marked as ultimately trusted
+gpg: directory '/home/pi/.gnupg/openpgp-revocs.d' created
+gpg: revocation certificate stored as '/home/pi/.gnupg/openpgp-revocs.d/75FF34D512D4F5262531BB32E473811AF29114BC.rev'
+public and secret key created and signed.
+
+pub   rsa3072 2022-09-26 [SC]
+      75FF34D512D4F5262531BB32E473811AF29114BC
+uid                      Thomas Stuetz <thomas.stuetz@nomail.com>
+sub   rsa3072 2022-09-26 [E]
+----
+
+
+=== Ansehen des private keys
+
+----
+gpg --export-secret-keys -a
+----
+
+.output
+----
+-----BEGIN PGP PRIVATE KEY BLOCK-----
+
+lQWGBGMxn8wBDADhUJzfDBWaXl/UXC16NpC3PTIBxdqfdjNoV+lv0oH699Vk2jse
+d00byp8dyW4hEdDGkcIQD9l8BWwl90J/PC2MKYSYWIvNbRoMpXhJJT5KjopcQFAk
+...
+f29zLrpRTfsgH3bfdpyhbtquqZVjRlKAXVRtdmeteuVQ75i3A9GYviIY5dmSPpn0
+8SSeltYaead94dCVZwN8V590xZ/aUgVg42JkaCsoSmxqMnO5ClvXPcYwSnabsx+z
+M0hf55MI4jFjbDgl4c2y3qmcqy9oGBWS1+ORRWJerz9exyEgiyY=
+=XiIE
+-----END PGP PRIVATE KEY BLOCK-----
+----
+
+* -a für Ausgabe als ASCII-Text
+
+=== Import eines pgp keys
+
+----
+gpg --import < datei.txt
+----
+
+oder
+
+----
+gpg --import
+----
+
+* mit Copy-Paste Key einfügen
+
+=== Auflisten aller keys
+
+----
+gpg --list-keys
+----
+
+.output
+----
+gpg: checking the trustdb
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+/home/pi/.gnupg/pubring.kbx
+---------------------------
+pub   rsa3072 2022-09-26 [SC]
+      75FF34D512D4F5262531BB32E473811AF29114BC
+uid           [ultimate] Thomas Stuetz <thomas.stuetz@nomail.com>
+sub   rsa3072 2022-09-26 [E]
+----
+
+
+=== Public Key auf Keyserver hochladen
+
+.siehe Skript
+----
+gpg --keyserver ...
+----
+
+
+=== Datei verschlüsseln
+
+* Skript S.84
+
+----
+gpg --encrypt -a -r thomas.stuetz@nomail.com hallo.txt
+----
+
+* man braucht die Passphrase nicht, da mit dem Public Key verschlüsselt wird
+* eine Datei `hallo.txt.asc` wird erstellt
+
+.cat hallo.txt.asc
+----
+-----BEGIN PGP MESSAGE-----
+
+hQGMA0OH9tFlXeihAQv/QmSXb6nqilkKr8sJADpaxVNBbji0CdXG6Jz62oGlEb36
+TA1CKEF+sd9hak0mvitBv4vkFosFtV8M8cqoOPz/etiLpxf/totjRzifLpxuOpdy
+FDKSXULTWZ171eqG63jZTmvNb392Lr87HyFKAUXhL7TSvz/c8226ahkEEg9Hykkc
+knGQ5fJ08zpKLf0zFgQB6tIXAKJhvB5dIxPkoAvUbFsNUeaxVpW9sH+NhDexfPLg
+szulTtmqCX5RxQAoOKV51qeubccfhluWKxzRyChNf5PQlWptlJOSr+9pso/mCtxK
+/QkRsGLa1Cy6CK7dSxomV92OgCoMaPk2LQ8GKp0Q8PkgEzlTHQp7txyrOKWltuQz
+gSWo7VMyY1UIRic9G0p6jcXua15jKT4Wgk6GKnQVjTMsIP91kXDHq6EqT/kS3hZ6
+XTjZIlhP0OJOV6OAJWE/bRt/2ewvr6qZiZ7Ef9m6YUoeVEaY1HgaYhQBJUmAGwja
+gddbIF+uzDFS7ixzYAfb0sAzAQpuSklFevNjsmt20N53dEknJEZfGGD7C3m3Vbe3
+nab55HF3ag5j/YCkAJtxwOCGpwuL/4mFTke6VtFkflVTJ0IExGAMXP2v9i2unmnz
+pP3kWZxl9iONk5vnU5N4aDwcV1sVIOCJ7jZqUD3woehEkPgoiBpFZn7ncBg5RXsV
+yui4yMdEm3rwtsTJzqtUpdsBu+jKAcTJudRCgNWNOsb6WhsEs0Wf7GHhK7XSMFTF
+RCcbbjgOwmu2LvAWpgb+Qeb6uczSkzn421P4zZw2F0u3XTL6D44rdCaDzJygP/K6
++14TvIuJ3QYNDW/MsuFIVA80jdpS
+=R11z
+-----END PGP MESSAGE-----
+----
+
+----
+gpg --decrypt -o hallo-neu.txt hallo.txt.asc
+----
+
+* Passphrase eingeben
+* mit `cat hallo-neu.txt` ansehen
+
+
+
+
+
+
+
+
 
 
 
@@ -169,6 +349,8 @@ image:import-certificates-4.png[]
 
 
 == Interesting Links
+
+* http://knopper.net/[Klaus Knopper - knopper.net^]
 
 * https://cpb-us-e1.wpmucdn.com/sites.psu.edu/dist/4/24696/files/2014/07/Unix.PSU_.pdf[Russell Poucher - UNIX: Working the
 Command Line in OS X^]
