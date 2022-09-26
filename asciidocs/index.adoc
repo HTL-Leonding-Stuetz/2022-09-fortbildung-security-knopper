@@ -1,4 +1,85 @@
-= Index page
+= 2022-09-fortbildung-security-knopper
 ifndef::imagesdir[:imagesdir: images]
 
-image::img.png[]
+== Organisatorisches
+
+- Vortragender: Klaus Knopper
+- Datum: 26.9.-28.9.2022
+- Ort: Sperlhof, Windischgarsten
+
+== Anbindung an RPi über Serial Port
+
+* siehe link:download/Script.pdf[Script.pdf], S. 81
+* https://pbxbook.com/other/mac-tty.html[Mike's PBX Cookbook - Mac's and serial TTY's]
+* zu kaufen bei https://www.amazon.de/PL2303TA-programming-serial-support-raspberry/dp/B09KGQCZ58/ref=sr_1_5?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=13VM6XXSRKS2T&keywords=usb+to+ttl&qid=1664182610&sprefix=usb+to+ttl%2Caps%2C104&sr=8-5[amazon]
+
+* Installation:
+** Man braucht keine Treiber
+** Man muss keine Software installieren
+** es reicht das Programm `screen`
+** Man sucht im `/dev`-Verzeichnis nach einem `cu.`-Port
++
+----
+❯ l
+total 13
+dr-xr-xr-x   4 root    wheel           5.9K Sep 14 19:53 .
+drwxr-xr-x  20 root    wheel           640B Aug 24 10:59 ..
+crw-rw-rw-   1 root    wheel     0x1d000000 Sep 14 19:53 aes_0
+crw-------   1 root    wheel     0x16000001 Sep 20 21:41 afsc_type5
+brw-------   1 root    operator   0x2000000 Sep 26 09:31 apfs-raw-device.2.0
+crw-------   1 root    wheel      0xb000000 Sep 14 19:53 auditpipe
+crw-r--r--   1 root    wheel      0xa000003 Sep 14 19:53 auditsessions
+crw-------   1 root    wheel     0x1f000000 Sep 14 19:53 autofs
+crw-------   1 root    wheel     0x23000000 Sep 14 19:53 autofs_control
+crw-rw-rw-   1 root    wheel     0x2200010c Sep 14 19:53 autofs_homedirmounter
+crw-rw-rw-   1 root    wheel     0x2100010c Sep 14 19:53 autofs_notrigger
+crw-rw-rw-   1 root    wheel     0x2000b278 Sep 14 19:53 autofs_nowait
+crw-------   1 root    wheel     0x17000000 Sep 14 19:53 bpf0
+crw-------   1 root    wheel     0x17000001 Sep 26 09:30 bpf1
+crw-------   1 root    wheel     0x17000002 Sep 26 09:23 bpf2
+crw-------   1 root    wheel     0x17000003 Sep 14 19:53 bpf3
+crw-------   1 stuetz  staff              0 Sep 16 14:18 console
+crw-rw-rw-   1 root    wheel      0x9000003 Sep 14 19:53 cu.Bluetooth-Incoming-Port
+crw-rw-rw-   1 root    wheel      0x9000001 Sep 14 19:53 cu.BoseRevolveIISoundLink
+crw-rw-rw-   1 root    wheel      0x9000005 Sep 26 10:41 cu.usbserial-1210
+brw-r-----   1 root    operator   0x1000000 Sep 14 19:53 disk0
+brw-r-----   1 root    operator   0x1000001 Sep 14 19:53 disk0s1
+brw-r-----   1 root    operator   0x1000002 Sep 14 19:53 disk0s2
+brw-r-----   1 root    operator   0x1000003 Sep 14 19:53 disk0s3
+brw-r-----   1 root    operator   0x1000004 Sep 14 19:53 disk1
+brw-r-----   1 root    operator   0x1000005 Sep 14 19:53 disk1s1
+brw-r-----   1 root    operator   0x1000006 Sep 14 19:53 disk1s2
+brw-r-----   1 root    operator   0x1000007 Sep 14 19:53 disk1s3
+brw-r-----   1 root    operator   0x1000008 Sep 14 19:53 disk1s4
+brw-r-----   1 root    operator   0x1000009 Sep 14 19:53 disk2
+brw-r-----   1 root    operator   0x100000a Sep 14 19:53 disk2s1
+...
+----
+
+* Hier sieht man den Port `cu.usbserial-1210`
+
+* Daher verwendet man
++
+----
+screen cu.usbserial-1210 115200`
+----
+
+
+
+
+
+
+== Theoretische Grundlagen
+
+
+
+
+
+
+
+
+
+
+
+
+
