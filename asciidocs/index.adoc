@@ -595,11 +595,36 @@ scrcpy
 ----
 
 
+=== Speichern von Passwörtern
+
+* KeePassX
+** für Linux, Mac und Windows
+** https://www.keepassx.org/
+
+=== Exkurs: Sokrates Passwort auslesen
+
+* einfach beim Passwort - Feld den `type` von `password` auf `text` ändern.
+
+image::sokrates-hacken.png[]
 
 
 
 
+=== Angriffspunkte bei Festplatten-Verschlüsselung
 
+* Folien.pdf S.36ff
+* Skript.pdf S.26
+
+
+==== Intrusion detection tools for Linux
+
+* Root Kit Hunter
+* Tiger
+** mit mehreren Tools
+
+----
+sudo apt install tiger
+----
 
 
 
