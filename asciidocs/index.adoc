@@ -102,6 +102,14 @@ image::gpio-pinout-diagram.png[]
 image::raspberry-pi-pins.jpg[]
 ====
 
+
+=== USB-Port Einstellungen auslesen
+
+----
+lsusb -v | less
+----
+
+
 == PGP
 
 * link:download/Folien.pdf[Folien.pdf^]
