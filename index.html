@@ -455,6 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_anbindung_an_rpi_über_serial_port">2. Anbindung an RPi über Serial Port</a>
 <ul class="sectlevel2">
 <li><a href="#_pin_belegung">2.1. Pin-Belegung</a></li>
+<li><a href="#_usb_port_einstellungen_auslesen">2.2. USB-Port Einstellungen auslesen</a></li>
 </ul>
 </li>
 <li><a href="#_pgp">3. PGP</a>
@@ -476,6 +477,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_openssl">5. OpenSSL</a>
 <ul class="sectlevel2">
 <li><a href="#_mini_webserver_mit_openssl">5.1. Mini-Webserver mit openssl</a></li>
+<li><a href="#_festplatten_verschlüsseln">5.2. Festplatten verschlüsseln</a></li>
+<li><a href="#_cryptsetup">5.3. cryptsetup</a></li>
+<li><a href="#_exkurs_scrcpy">5.4. Exkurs scrcpy</a></li>
 </ul>
 </li>
 <li><a href="#_interesting_links">6. Interesting Links</a></li>
@@ -647,6 +651,14 @@ Das rote Kabel wurde entfernt, da dieses die Stromversorgung ist und den RPi zer
 </div>
 </div>
 </details>
+</div>
+<div class="sect2">
+<h3 id="_usb_port_einstellungen_auslesen"><a class="anchor" href="#_usb_port_einstellungen_auslesen"></a>2.2. USB-Port Einstellungen auslesen</h3>
+<div class="listingblock">
+<div class="content">
+<pre>lsusb -v | less</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1200,6 +1212,104 @@ Verifying - Enter Export Password:</pre>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_festplatten_verschlüsseln"><a class="anchor" href="#_festplatten_verschlüsseln"></a>5.2. Festplatten verschlüsseln</h3>
+<div class="listingblock">
+<div class="content">
+<pre>echo brot | sha256sum</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">output</div>
+<div class="content">
+<pre>4806a20d20d69c39e66a16c588e84e6fa79c73bc040f93f70fa56dc962fb7bd4  -</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cryptsetup"><a class="anchor" href="#_cryptsetup"></a>5.3. cryptsetup</h3>
+<div class="listingblock">
+<div class="content">
+<pre>sudo apt install cryptsetup</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/dm-crypt.png" alt="dm crypt">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Das Laufwerk muss dann noch gemounted werden.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Skript.pdf S.23ff</div>
+<div class="content">
+<pre>dd if=/dev/zero of=crypt.img bs=1M count=100
+
+hexedit crypt.img
+
+sudo cryptsetup open crypt.img geheim --type plain</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Man muss hier das Passwort eingeben</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Gibt man das falsche Passwort ein, ist es dm-crypt egal, es versucht einfach die Daten mit den Schlüssel zu entschlüsseln (was natürlich nicht gelingt)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ls -l /dev/mapper/geheim</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Laufwerk mounten</div>
+<div class="content">
+<pre>sudo mount /dev/geheim /mnt</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">schreibbar mounten</div>
+<div class="content">
+<pre>sudo mount -o uid=1000,umask=000 /dev/geheim /mnt
+
+ls -l /mnt</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exkurs_scrcpy"><a class="anchor" href="#_exkurs_scrcpy"></a>5.4. Exkurs scrcpy</h3>
+<div class="listingblock">
+<div class="content">
+<pre>sudo apt install scrcopy</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>über apk an Handy per Kabel anschließen</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Handy Screen auf Desktop mirroren</div>
+<div class="content">
+<pre>scrcpy</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1222,7 +1332,7 @@ Command Line in OS X</a></p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2022-09-26 16:11:16 UTC
+Last updated 2022-09-27 07:31:36 UTC
 </div>
 </div>
 </body>
