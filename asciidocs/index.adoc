@@ -529,6 +529,127 @@ https://10.0.0.223/hallo.txt
 ----
 
 
+=== Festplatten verschlüsseln
+
+
+----
+echo brot | sha256sum
+----
+
+.output
+----
+4806a20d20d69c39e66a16c588e84e6fa79c73bc040f93f70fa56dc962fb7bd4  -
+----
+
+
+=== cryptsetup
+
+----
+sudo apt install cryptsetup
+----
+
+image::dm-crypt.png[]
+
+* Das Laufwerk muss dann noch gemounted werden.
+
+.Skript.pdf S.23ff
+----
+dd if=/dev/zero of=crypt.img bs=1M count=100
+
+hexedit crypt.img
+
+sudo cryptsetup open crypt.img geheim --type plain
+----
+
+* Man muss hier das Passwort eingeben
+** Gibt man das falsche Passwort ein, ist es dm-crypt egal, es versucht einfach die Daten mit den Schlüssel zu entschlüsseln (was natürlich nicht gelingt)
+
+----
+ls -l /dev/mapper/geheim
+----
+
+.Laufwerk mounten
+----
+sudo mount /dev/geheim /mnt
+----
+
+.schreibbar mounten
+----
+sudo mount -o uid=1000,umask=000 /dev/geheim /mnt
+
+ls -l /mnt
+----
+
+
+=== Exkurs scrcpy
+
+----
+sudo apt install scrcopy
+----
+
+* über apk an Handy per Kabel anschließen
+
+.Handy Screen auf Desktop mirroren
+----
+scrcpy
+----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
