@@ -483,6 +483,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_speichern_von_passwörtern">5.5. Speichern von Passwörtern</a></li>
 <li><a href="#_exkurs_sokrates_passwort_auslesen">5.6. Exkurs: Sokrates Passwort auslesen</a></li>
 <li><a href="#_angriffspunkte_bei_festplatten_verschlüsselung">5.7. Angriffspunkte bei Festplatten-Verschlüsselung</a></li>
+<li><a href="#_backup_und_archivierung">5.8. Backup und Archivierung</a></li>
+<li><a href="#_recover_von_gelöschten_dateien">5.9. Recover von gelöschten Dateien</a></li>
+<li><a href="#_sicheres_löschen">5.10. Sicheres Löschen</a></li>
+<li><a href="#_image_von_disk">5.11. Image von Disk</a></li>
 </ul>
 </li>
 <li><a href="#_interesting_links">6. Interesting Links</a></li>
@@ -1386,6 +1390,141 @@ ls -l /mnt</pre>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_backup_und_archivierung"><a class="anchor" href="#_backup_und_archivierung"></a>5.8. Backup und Archivierung</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Backup &#8230;&#8203; aktueller Stand</p>
+</li>
+<li>
+<p>Archivierung &#8230;&#8203; Backup zu einem gewissen Zeitpunkt</p>
+</li>
+<li>
+<p>rsnapshot</p>
+</li>
+<li>
+<p>borgbackup (!)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_recover_von_gelöschten_dateien"><a class="anchor" href="#_recover_von_gelöschten_dateien"></a>5.9. Recover von gelöschten Dateien</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Folien.pdf S.42</p>
+</li>
+<li>
+<p>testdisk</p>
+</li>
+<li>
+<p>Photorec</p>
+</li>
+<li>
+<p>beide Programme sind im Paket <code>testdisk</code> enthalten</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sicheres_löschen"><a class="anchor" href="#_sicheres_löschen"></a>5.10. Sicheres Löschen</h3>
+<div class="sect3">
+<h4 id="_diskdump_dd"><a class="anchor" href="#_diskdump_dd"></a>5.10.1. DiskDump dd</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Skript.pdf S.28</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>dd if=/dev/urandom of=/dev/sdb oflag=sync,direct bs=1M status=progress</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>/dev/urandom &#8230;&#8203; Zufallszahlengenerator, sehr ressourcenintensiv</p>
+</li>
+<li>
+<p>of=/dev/sdb &#8230;&#8203; der gesamte (hier:) USB-Stick wird formatiert (mit allen Partitionen)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_wipe"><a class="anchor" href="#_wipe"></a>5.10.2. wipe</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>mehrfaches Überschreiben</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ansehen_der_partitionen"><a class="anchor" href="#_ansehen_der_partitionen"></a>5.10.3. Ansehen der Partitionen</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>lsblk steht für "list block devices" und dient dazu, verfügbare Block devices in Baumdarstellung aufzulisten und Informationen zu diesen anzuzeigen. Es liest hierzu das sysfs-Dateisystem ein.</p>
+</li>
+<li>
+<p>Es ist vergleichbar mit blkid, welches aber nur für Geräte funktioniert, auf denen eine gültige Partitionstabelle existiert. lsblk hingegen listet auch Geräte auf, wenn diese über keine gültige Partitionstabelle verfügen.</p>
+</li>
+<li>
+<p>Block Device &#8230;&#8203; Abbildung eines physikalischen Datenträgers unter Linux</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>lsblk</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">output</div>
+<div class="content">
+<pre>pi@raspberrypi:~ $ lsblk
+NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+mmcblk0     179:0    0 14.8G  0 disk
+|-mmcblk0p1 179:1    0  256M  0 part /boot
+`-mmcblk0p2 179:2    0 14.6G  0 part /</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_image_von_disk"><a class="anchor" href="#_image_von_disk"></a>5.11. Image von Disk</h3>
+<div class="listingblock">
+<div class="content">
+<pre>cp /dev/dvd image.iso</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>eher langsam (byte für byte wird kopiert - 1:1-Kopie)</p>
+</li>
+<li>
+<p>für schnelles kopieren wird <code>partclone</code> verwendet (nur die belegten Sektoren werden kopiert)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>keine 1:1-Kopie, dafür schneller</p>
+</li>
+<li>
+<p>gesamte Disk kann damit nicht kopiert werden, da die Partitionstabelle nicht mitkopiert wird - nur partitionsweise</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1408,7 +1547,7 @@ Command Line in OS X</a></p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2022-09-27 07:56:22 UTC
+Last updated 2022-09-27 09:50:35 UTC
 </div>
 </div>
 </body>
