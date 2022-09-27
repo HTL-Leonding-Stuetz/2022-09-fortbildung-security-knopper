@@ -480,6 +480,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_festplatten_verschlüsseln">5.2. Festplatten verschlüsseln</a></li>
 <li><a href="#_cryptsetup">5.3. cryptsetup</a></li>
 <li><a href="#_exkurs_scrcpy">5.4. Exkurs scrcpy</a></li>
+<li><a href="#_speichern_von_passwörtern">5.5. Speichern von Passwörtern</a></li>
+<li><a href="#_exkurs_sokrates_passwort_auslesen">5.6. Exkurs: Sokrates Passwort auslesen</a></li>
+<li><a href="#_angriffspunkte_bei_festplatten_verschlüsselung">5.7. Angriffspunkte bei Festplatten-Verschlüsselung</a></li>
 </ul>
 </li>
 <li><a href="#_interesting_links">6. Interesting Links</a></li>
@@ -1310,6 +1313,79 @@ ls -l /mnt</pre>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_speichern_von_passwörtern"><a class="anchor" href="#_speichern_von_passwörtern"></a>5.5. Speichern von Passwörtern</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>KeePassX</p>
+<div class="ulist">
+<ul>
+<li>
+<p>für Linux, Mac und Windows</p>
+</li>
+<li>
+<p><a href="https://www.keepassx.org/" class="bare">https://www.keepassx.org/</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exkurs_sokrates_passwort_auslesen"><a class="anchor" href="#_exkurs_sokrates_passwort_auslesen"></a>5.6. Exkurs: Sokrates Passwort auslesen</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>einfach beim Passwort - Feld den <code>type</code> von <code>password</code> auf <code>text</code> ändern.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/sokrates-hacken.png" alt="sokrates hacken">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_angriffspunkte_bei_festplatten_verschlüsselung"><a class="anchor" href="#_angriffspunkte_bei_festplatten_verschlüsselung"></a>5.7. Angriffspunkte bei Festplatten-Verschlüsselung</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Folien.pdf S.36ff</p>
+</li>
+<li>
+<p>Skript.pdf S.26</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_intrusion_detection_tools_for_linux"><a class="anchor" href="#_intrusion_detection_tools_for_linux"></a>5.7.1. Intrusion detection tools for Linux</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Root Kit Hunter</p>
+</li>
+<li>
+<p>Tiger</p>
+<div class="ulist">
+<ul>
+<li>
+<p>mit mehreren Tools</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sudo apt install tiger</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1332,7 +1408,7 @@ Command Line in OS X</a></p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2022-09-27 07:31:36 UTC
+Last updated 2022-09-27 07:56:22 UTC
 </div>
 </div>
 </body>
