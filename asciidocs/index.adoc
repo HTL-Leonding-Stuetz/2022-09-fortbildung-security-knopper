@@ -615,6 +615,17 @@ image::sokrates-hacken.png[]
 * Folien.pdf S.36ff
 * Skript.pdf S.26
 
+////
+==== Starten einer Datei mit Öffnen einer admin-shell
+
+----
+dpkg -l | grep shell
+sudo cp /bin/dash /...
+sudo cp /bin/tcsh /...
+sudo chmod u+s /...
+/...
+----
+////
 
 ==== Intrusion detection tools for Linux
 
@@ -625,6 +636,82 @@ image::sokrates-hacken.png[]
 ----
 sudo apt install tiger
 ----
+
+
+=== Backup und Archivierung
+
+* Backup ... aktueller Stand
+* Archivierung ... Backup zu einem gewissen Zeitpunkt
+
+* rsnapshot
+* borgbackup (!)
+
+
+=== Recover von gelöschten Dateien
+
+
+* Folien.pdf S.42
+* testdisk
+* Photorec
+* beide Programme sind im Paket `testdisk` enthalten
+
+=== Sicheres Löschen
+
+==== DiskDump dd
+
+* Skript.pdf S.28
+
+----
+dd if=/dev/urandom of=/dev/sdb oflag=sync,direct bs=1M status=progress
+----
+
+* /dev/urandom ... Zufallszahlengenerator, sehr ressourcenintensiv
+* of=/dev/sdb ... der gesamte (hier:) USB-Stick wird formatiert (mit allen Partitionen)
+
+
+==== wipe
+
+* mehrfaches Überschreiben
+
+
+==== Ansehen der Partitionen
+
+* lsblk steht für "list block devices" und dient dazu, verfügbare Block devices in Baumdarstellung aufzulisten und Informationen zu diesen anzuzeigen. Es liest hierzu das sysfs-Dateisystem ein.
+
+* Es ist vergleichbar mit blkid, welches aber nur für Geräte funktioniert, auf denen eine gültige Partitionstabelle existiert. lsblk hingegen listet auch Geräte auf, wenn diese über keine gültige Partitionstabelle verfügen.
+
+* Block Device ... Abbildung eines physikalischen Datenträgers unter Linux
+
+----
+lsblk
+----
+
+.output
+----
+pi@raspberrypi:~ $ lsblk
+NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+mmcblk0     179:0    0 14.8G  0 disk
+|-mmcblk0p1 179:1    0  256M  0 part /boot
+`-mmcblk0p2 179:2    0 14.6G  0 part /
+----
+
+
+
+=== Image von Disk
+
+----
+cp /dev/dvd image.iso
+----
+
+
+* eher langsam (byte für byte wird kopiert - 1:1-Kopie)
+* für schnelles kopieren wird `partclone` verwendet (nur die belegten Sektoren werden kopiert)
+** keine 1:1-Kopie, dafür schneller
+** gesamte Disk kann damit nicht kopiert werden, da die Partitionstabelle nicht mitkopiert wird - nur partitionsweise
+
+
+
+
 
 
 
