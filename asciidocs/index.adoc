@@ -710,33 +710,116 @@ cp /dev/dvd image.iso
 ** gesamte Disk kann damit nicht kopiert werden, da die Partitionstabelle nicht mitkopiert wird - nur partitionsweise
 
 
+=== Kopieren von Datenträgern
+
+zB USB-Sticks
+
+----
+dd if=/dev/sda of=/dev/sdb
+cp /dev/sda /dev/sdb
+----
+
+* beide Befehle bewirken dasselbe
+
+
+=== Steganografie
+
+* Stegosuite (java)
+** https://salsa.debian.org/java-team/stegosuite[^]
+** https://github.com/osde8info/stegosuite[^]
+** https://www.java-blog-buch.de/c-steganographie-daten-in-bildern-verstecken/[^]
+* openstego
+** https://www.openstego.com/
+* steghide
+** für Kommandozeile
+** https://steghide.sourceforge.net/
+
+* Folien.pdf S.45
+* Skript.pdf S.31
 
 
 
+== ESB32 flashen mit Tasmota
+
+----
+./flash.sh tasmota-DE.bin
+----
+
+* Die Taste "flash" drücken
+** Der Chip wird in den Flash-Modus versetzt
 
 
+=== OBI-Socket
 
 
+== Bildschirm auf Website spiegeln
+
+* vnc-server am Rechner
+** https://www.elektronik-kompendium.de/sites/raspberry-pi/2011121.htm[X11VNC^] für RPi
++
+----
+x11vnc -shared -viwonly -loop -forever --noxdamage -nopw
+----
 
 
+* in der html-Seite ein js-script (novnc) einbinden
+
+== Website downloaden
+
+----
+wget -mirror
+----
 
 
+== OpenVAS Security Scanner
+
+* skript.pdf S.91
+
+[source,bash]
+----
+#!/bin/bash
+#docker run --rm -v /tmp/:/reports/:rw pensivesecurity/rpi-scanner:latest \
+#       python3 -u scan.py "10.0.0.0/24" --debug --update \
+#       --format="PDF" --output rpi-openvas-report.pdf --profile="Full and fast"
+
+# Hinweis: --update dauert sehr lange, um openvas und alle Plugins zu aktualisieren
+# daher besser raus nehmen
+
+docker run --rm -v /tmp/:/reports/:rw pensivesecurity/rpi-scanner:latest \
+       python3 -u scan.py "10.0.0.0/24" --debug \
+       --format="PDF" --output rpi-openvas-report.pdf --profile="Full and fast"
+----
 
 
+== Einbruch (Netzwerk) und Datendiebstahl
+
+skript.pdf S. 92
 
 
+== Firewall
+skript S.40ff
 
 
+== VPN _ Virtual Private Network
+
+* Skript S.51ff
+
+* vtun
+** apt install vtun
+** Server muss im Internet stehen
+** Der Schlüssel wird per ssh auf den Client übertragen
+* wireguard
+** Kernel muss passen (kernel modul muss enthalten sein)
 
 
+== Ethercap
 
+////
+== Windischgarsten - Dokumente
 
+* http://knopper.net/Windischgarsten
 
-
-
-
-
-
+////
 
 
 
