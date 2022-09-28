@@ -438,6 +438,221 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -487,9 +702,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_recover_von_gelöschten_dateien">5.9. Recover von gelöschten Dateien</a></li>
 <li><a href="#_sicheres_löschen">5.10. Sicheres Löschen</a></li>
 <li><a href="#_image_von_disk">5.11. Image von Disk</a></li>
+<li><a href="#_kopieren_von_datenträgern">5.12. Kopieren von Datenträgern</a></li>
+<li><a href="#_steganografie">5.13. Steganografie</a></li>
 </ul>
 </li>
-<li><a href="#_interesting_links">6. Interesting Links</a></li>
+<li><a href="#_esb32_flashen_mit_tasmota">6. ESB32 flashen mit Tasmota</a>
+<ul class="sectlevel2">
+<li><a href="#_obi_socket">6.1. OBI-Socket</a></li>
+</ul>
+</li>
+<li><a href="#_bildschirm_auf_website_spiegeln">7. Bildschirm auf Website spiegeln</a></li>
+<li><a href="#_website_downloaden">8. Website downloaden</a></li>
+<li><a href="#_openvas_security_scanner">9. OpenVAS Security Scanner</a></li>
+<li><a href="#_einbruch_netzwerk_und_datendiebstahl">10. Einbruch (Netzwerk) und Datendiebstahl</a></li>
+<li><a href="#_firewall">11. Firewall</a></li>
+<li><a href="#_vpn_virtual_private_network">12. VPN _ Virtual Private Network</a></li>
+<li><a href="#_ethercap">13. Ethercap</a></li>
+<li><a href="#_interesting_links">14. Interesting Links</a></li>
 </ul>
 </div>
 </div>
@@ -1525,10 +1754,233 @@ mmcblk0     179:0    0 14.8G  0 disk
 </ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_kopieren_von_datenträgern"><a class="anchor" href="#_kopieren_von_datenträgern"></a>5.12. Kopieren von Datenträgern</h3>
+<div class="paragraph">
+<p>zB USB-Sticks</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>dd if=/dev/sda of=/dev/sdb
+cp /dev/sda /dev/sdb</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>beide Befehle bewirken dasselbe</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_steganografie"><a class="anchor" href="#_steganografie"></a>5.13. Steganografie</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Stegosuite (java)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://salsa.debian.org/java-team/stegosuite" class="bare" target="_blank" rel="noopener">https://salsa.debian.org/java-team/stegosuite</a></p>
+</li>
+<li>
+<p><a href="https://github.com/osde8info/stegosuite" class="bare" target="_blank" rel="noopener">https://github.com/osde8info/stegosuite</a></p>
+</li>
+<li>
+<p><a href="https://www.java-blog-buch.de/c-steganographie-daten-in-bildern-verstecken/" class="bare" target="_blank" rel="noopener">https://www.java-blog-buch.de/c-steganographie-daten-in-bildern-verstecken/</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>openstego</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.openstego.com/" class="bare">https://www.openstego.com/</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>steghide</p>
+<div class="ulist">
+<ul>
+<li>
+<p>für Kommandozeile</p>
+</li>
+<li>
+<p><a href="https://steghide.sourceforge.net/" class="bare">https://steghide.sourceforge.net/</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Folien.pdf S.45</p>
+</li>
+<li>
+<p>Skript.pdf S.31</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_interesting_links"><a class="anchor" href="#_interesting_links"></a>6. Interesting Links</h2>
+<h2 id="_esb32_flashen_mit_tasmota"><a class="anchor" href="#_esb32_flashen_mit_tasmota"></a>6. ESB32 flashen mit Tasmota</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre>./flash.sh tasmota-DE.bin</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Die Taste "flash" drücken</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Der Chip wird in den Flash-Modus versetzt</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_obi_socket"><a class="anchor" href="#_obi_socket"></a>6.1. OBI-Socket</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bildschirm_auf_website_spiegeln"><a class="anchor" href="#_bildschirm_auf_website_spiegeln"></a>7. Bildschirm auf Website spiegeln</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>vnc-server am Rechner</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.elektronik-kompendium.de/sites/raspberry-pi/2011121.htm" target="_blank" rel="noopener">X11VNC</a> für RPi</p>
+<div class="listingblock">
+<div class="content">
+<pre>x11vnc -shared -viwonly -loop -forever --noxdamage -nopw</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>in der html-Seite ein js-script (novnc) einbinden</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_website_downloaden"><a class="anchor" href="#_website_downloaden"></a>8. Website downloaden</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre>wget -mirror</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openvas_security_scanner"><a class="anchor" href="#_openvas_security_scanner"></a>9. OpenVAS Security Scanner</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>skript.pdf S.91</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="c">#!/bin/bash</span>
+<span class="c">#docker run --rm -v /tmp/:/reports/:rw pensivesecurity/rpi-scanner:latest \</span>
+<span class="c">#       python3 -u scan.py "10.0.0.0/24" --debug --update \</span>
+<span class="c">#       --format="PDF" --output rpi-openvas-report.pdf --profile="Full and fast"</span>
+
+<span class="c"># Hinweis: --update dauert sehr lange, um openvas und alle Plugins zu aktualisieren</span>
+<span class="c"># daher besser raus nehmen</span>
+
+docker run <span class="nt">--rm</span> <span class="nt">-v</span> /tmp/:/reports/:rw pensivesecurity/rpi-scanner:latest <span class="se">\</span>
+       python3 <span class="nt">-u</span> scan.py <span class="s2">"10.0.0.0/24"</span> <span class="nt">--debug</span> <span class="se">\</span>
+       <span class="nt">--format</span><span class="o">=</span><span class="s2">"PDF"</span> <span class="nt">--output</span> rpi-openvas-report.pdf <span class="nt">--profile</span><span class="o">=</span><span class="s2">"Full and fast"</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_einbruch_netzwerk_und_datendiebstahl"><a class="anchor" href="#_einbruch_netzwerk_und_datendiebstahl"></a>10. Einbruch (Netzwerk) und Datendiebstahl</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>skript.pdf S. 92</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_firewall"><a class="anchor" href="#_firewall"></a>11. Firewall</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>skript S.40ff</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vpn_virtual_private_network"><a class="anchor" href="#_vpn_virtual_private_network"></a>12. VPN _ Virtual Private Network</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Skript S.51ff</p>
+</li>
+<li>
+<p>vtun</p>
+<div class="ulist">
+<ul>
+<li>
+<p>apt install vtun</p>
+</li>
+<li>
+<p>Server muss im Internet stehen</p>
+</li>
+<li>
+<p>Der Schlüssel wird per ssh auf den Client übertragen</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>wireguard</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Kernel muss passen (kernel modul muss enthalten sein)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ethercap"><a class="anchor" href="#_ethercap"></a>13. Ethercap</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_interesting_links"><a class="anchor" href="#_interesting_links"></a>14. Interesting Links</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -1547,7 +1999,7 @@ Command Line in OS X</a></p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2022-09-27 09:50:35 UTC
+Last updated 2022-09-28 10:33:48 UTC
 </div>
 </div>
 </body>
